@@ -36,12 +36,16 @@ RUN curl -sL https://dl.yarnpkg.com/rpm/yarn.repo -o /etc/yum.repos.d/yarn.repo 
   yum install -y yarn
 
 
+ARG TARGETPLATFORM
+RUN echo "@@@ @@@ @@@ @@@ Building for ${TARGETPLATFORM}"
+
+
 # Install Go
 # https://github.com/aws/aws-sam-build-images/blob/develop/build-image-src/Dockerfile-go1x
 # https://stackoverflow.com/a/67601735/2426653
-ARG TARGETARCH
-RUN ARCH="$TARGETARCH"; \
-  if [ "$ARCH" == "arm" ]; then ARCH=arm64; else ARCH=amd64; fi; \
+ARG TARGETPLATFORM
+RUN ARCH="$TARGETPLATFORM"; \
+  if [ "$ARCH" == "linux/arm64" ]; then ARCH=arm64; else ARCH=amd64; fi; \
   curl -L https://go.dev/dl/$(curl -L "https://go.dev/VERSION/?m=text" | grep go1.).linux-${ARCH}.tar.gz | tar -zx -C /usr/local
 ENV PATH=$PATH:/usr/local/go/bin:/root/go/bin
 # Set GOPROXY envvar to avoid using the default proxy.golang.org proxy

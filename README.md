@@ -15,8 +15,11 @@ docker buildx build --platform linux/amd64,linux/arm64 -t <username>/<repository
 # Build and push to hub docker repo
 docker buildx build --platform linux/amd64,linux/arm64 -t <username>/<repository> --push .
 
-# Example:
+# Example 1: build and push to docker hub
 docker buildx build --platform linux/amd64,linux/arm64 -t iterate/aws-sam-python39 --push .
+# Example 2: Build only and output to build.log:
+# https://forums.docker.com/t/capture-ouput-of-docker-build-into-a-log-file/123178/2
+docker buildx build --platform linux/amd64,linux/arm64 -t iterate/aws-sam-python39 . 2>&1 | tee build.log
 ```
 
 https://circleci.com/docs/2.0/custom-images/#creating-a-custom-image-manually
