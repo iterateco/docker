@@ -3,7 +3,7 @@ FROM public.ecr.aws/sam/build-python3.11:latest
 
 LABEL co.iterate.python="3.11"
 LABEL co.iterate.node="16.x"
-LABEL co.iterate.poetry="1.8.3"
+LABEL co.iterate.poetry="1.8.5"
 LABEL co.iterate.yarn="1.22.22"
 
 # Add poetry to PATH
@@ -50,7 +50,7 @@ RUN yum install -y nodejs --setopt=nodesource-nodejs.module_hotfixes=1
 
 
 # Install poetry and sorting plugin
-RUN curl -sSL https://install.python-poetry.org | python3 - --version 1.8.3 && \
+RUN curl -sSL https://install.python-poetry.org | python3 - --version 1.8.5 && \
   ~/.local/share/pypoetry/venv/bin/poetry self add poetry-plugin-sort
 
 
